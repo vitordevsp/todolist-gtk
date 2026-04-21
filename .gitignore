@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.libs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Database
+*.db
+
+# Virtual Environment
+venv/
+.venv/
+
+# PyInstaller
+*.spec
+
+# IDEs
+.vscode/
+.idea/
+.project
+.pydevproject
+.settings/
