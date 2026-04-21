@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Todo List GTK
+Comment=Gerencie suas tarefas com simplicidade e estilo
+Exec=todolist-gtk
+Icon=com.vitordevsp.TodoList
+Type=Application
+Terminal=false
+Categories=Office;Utility;TodoList;
+Keywords=todo;task;list;
+StartupNotify=true
+X-Flatpak=com.vitordevsp.TodoList

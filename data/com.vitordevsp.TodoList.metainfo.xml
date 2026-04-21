@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.vitordevsp.TodoList</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Todo List GTK</name>
+  <summary>Um aplicativo de lista de tarefas moderno e nativo</summary>
+  <description>
+    <p>
+      Todo List GTK é um gerenciador de tarefas focado em simplicidade e design premium.
+      Inspirado no Simplenote, ele oferece uma interface limpa e intuitiva para organizar
+      suas listas e tarefas diárias no Linux.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.vitordevsp.TodoList.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/vitordevsp/todolist-gtk/main/screenshots/main.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/vitordevsp/todolist-gtk</url>
+  <content_rating type="oars-1.1" />
+</component>
