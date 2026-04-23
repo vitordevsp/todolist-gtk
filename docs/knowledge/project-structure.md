@@ -18,12 +18,26 @@ Estilos ficam em `src/styles/` porque sao parte direta da implementacao da UI. E
 O diretorio `data/` deve guardar arquivos que o sistema desktop consome para reconhecer e exibir o aplicativo:
 
 - `data/br.com.vitordevsp.TodoList.desktop`: entrada de menu e comando de abertura.
-- `data/br.com.vitordevsp.TodoList.metainfo.xml`: metadados AppStream.
+- `data/br.com.vitordevsp.TodoList.metainfo.xml`: metadados AppStream e versao publica exibida por lojas/gerenciadores de apps.
 - `data/br.com.vitordevsp.TodoList.svg`: icone do aplicativo.
 
 Evite colocar codigo Python, CSS da interface ou banco de dados em `data/`. Esse diretorio deve continuar focado em integracao desktop.
 
-## 3. Empacotamento
+## 3. Versionamento
+
+O versionamento fica dividido em duas camadas:
+
+- `CHANGELOG.md`: historico humano de releases, seguindo Keep a Changelog e Semantic Versioning.
+- `data/br.com.vitordevsp.TodoList.metainfo.xml`: versao AppStream dentro de `<releases>`, usada por ferramentas Flatpak/AppStream.
+
+Para fechar uma release, atualize os dois arquivos no mesmo commit:
+
+1. Mova as notas de `Unreleased` para a nova versao em `CHANGELOG.md`.
+2. Atualize o `<release version="...">` mais recente no metainfo.
+3. Gere o bundle e valide instalacao/execucao.
+4. Crie uma tag Git no commit da release, por exemplo `v0.1.0`.
+
+## 4. Empacotamento
 
 O manifesto `br.com.vitordevsp.TodoList.yml` lista os arquivos locais que entram no Flatpak. Ele deve continuar explicito, usando fontes `type: file`, para evitar copiar arquivos inesperados do repositorio.
 
@@ -36,7 +50,7 @@ O bundle oficial instala:
 
 `make build` continua sendo um fluxo local via PyInstaller. `make bundle` deve permanecer separado dele e empacotar o codigo Python para rodar com o runtime GNOME do Flatpak.
 
-## 4. Dados do Usuario
+## 5. Dados do Usuario
 
 Dados criados em runtime nao devem ser salvos dentro do repositorio.
 
@@ -47,7 +61,7 @@ O banco SQLite e criado por `src/models.py` usando o diretorio XDG retornado pel
 
 Use `docs/knowledge/persistence-and-xdg.md` como referencia para detalhes de persistencia.
 
-## 5. Quando Atualizar Este Documento
+## 6. Quando Atualizar Este Documento
 
 Atualize este arquivo quando:
 
@@ -55,3 +69,4 @@ Atualize este arquivo quando:
 - o manifesto Flatpak passar a instalar novos tipos de recurso;
 - surgir uma nova pasta de codigo, recurso visual ou dado local;
 - o fluxo `make build`, `make flatpak` ou `make bundle` mudar a forma como os arquivos sao empacotados.
+- o processo de versionamento ou release mudar.

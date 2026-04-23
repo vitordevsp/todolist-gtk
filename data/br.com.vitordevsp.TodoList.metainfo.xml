@@ -19,5 +19,12 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/vitordevsp/todolist-gtk</url>
+  <releases>
+    <release version="0.0.0" date="2026-04-23" type="development">
+      <description>
+        <p>Ponto inicial de versionamento antes da primeira release publica.</p>
+      </description>
+    </release>
+  </releases>
   <content_rating type="oars-1.1" />
 </component>
