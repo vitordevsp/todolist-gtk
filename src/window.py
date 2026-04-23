@@ -156,12 +156,30 @@ class TodoWindow(Adw.ApplicationWindow):
         flap_toggle.connect("clicked", lambda x: self.flap.set_reveal_flap(not self.flap.get_reveal_flap()))
         self.header_bar.pack_start(flap_toggle)
 
+        self.header_context_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        self.header_context_box.set_valign(Gtk.Align.CENTER)
+        self.header_session_icon = Gtk.Image(icon_name="view-list-symbolic", pixel_size=18)
+        self.header_context_box.append(self.header_session_icon)
+
+        header_text_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.header_title_label = Gtk.Label(label="Todo List GTK")
+        self.header_title_label.add_css_class("heading")
+        self.header_title_label.set_xalign(0)
+        self.header_meta_label = Gtk.Label(label="Selecione uma lista")
+        self.header_meta_label.add_css_class("dim-label")
+        self.header_meta_label.set_xalign(0)
+        header_text_box.append(self.header_title_label)
+        header_text_box.append(self.header_meta_label)
+        self.header_context_box.append(header_text_box)
+        self.header_bar.set_title_widget(self.header_context_box)
+
         # Botao para renomear sessao (Lapis)
         self.edit_session_btn = Gtk.Button(icon_name="document-edit-symbolic")
         self.edit_session_btn.add_css_class("flat")
         self.edit_session_btn.connect("clicked", self.on_rename_session_clicked)
+        self.edit_session_btn.set_sensitive(False)
         self.header_bar.pack_start(self.edit_session_btn)
-        
+
         main_area.append(self.header_bar)
 
         # Conteudo Centralizado
@@ -171,15 +189,6 @@ class TodoWindow(Adw.ApplicationWindow):
         content_box.set_margin_start(60)
         content_box.set_margin_end(60)
         content_box.set_spacing(18)
-
-        # Titulo da Sessao Atual com Icone
-        header_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
-        self.session_icon_widget = Gtk.Image(icon_name="view-list-symbolic", pixel_size=32)
-        self.session_label = Gtk.Label()
-        self.session_label.add_css_class("title-1")
-        header_box.append(self.session_icon_widget)
-        header_box.append(self.session_label)
-        content_box.append(header_box)
 
         # Campo de entrada para novas tarefas (Input)
         input_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
@@ -219,6 +228,23 @@ class TodoWindow(Adw.ApplicationWindow):
         
         # Carregamento Inicial
         self.load_sessions()
+
+    def update_header_context(self, task_count=None):
+        """Sincroniza o header com a lista atual e a quantidade de tarefas."""
+        if self.current_session_id:
+            self.header_session_icon.set_from_icon_name(self.current_session_icon)
+            self.header_title_label.set_text(self.current_session_name)
+            if task_count is None:
+                meta_text = "Lista ativa"
+            elif task_count == 1:
+                meta_text = "1 tarefa"
+            else:
+                meta_text = f"{task_count} tarefas"
+            self.header_meta_label.set_text(meta_text)
+        else:
+            self.header_session_icon.set_from_icon_name("view-list-symbolic")
+            self.header_title_label.set_text("Todo List GTK")
+            self.header_meta_label.set_text("Selecione uma lista")
 
     def load_sessions(self, select_id=None):
         """Busca sessoes no banco e preenche a barra lateral.
@@ -261,6 +287,12 @@ class TodoWindow(Adw.ApplicationWindow):
             first_row = self.session_list.get_row_at_index(0)
             if first_row:
                 self.session_list.select_row(first_row)
+            else:
+                self.current_session_id = None
+                self.current_session_name = ""
+                self.current_session_icon = "view-list-symbolic"
+                self.edit_session_btn.set_sensitive(False)
+                self.update_header_context(task_count=0)
 
     def on_session_selected(self, listbox, row):
         """Handler para quando uma sessao e clicada na barra lateral.
@@ -273,11 +305,7 @@ class TodoWindow(Adw.ApplicationWindow):
             self.current_session_id = row.session_id
             self.current_session_name = row.get_title()
             self.current_session_icon = row.icon_name
-            
-            self.session_label.set_text(self.current_session_name)
-            self.session_icon_widget.set_from_icon_name(self.current_session_icon)
             self.edit_session_btn.set_sensitive(self.current_session_name != "Geral")
-            
             self.load_tasks()
 
     def load_tasks(self):
@@ -295,11 +323,14 @@ class TodoWindow(Adw.ApplicationWindow):
                 row = TodoRow(todo_id, text, done, self.model, self.remove_row)
                 self.list_box.append(row)
 
+        self.update_header_context(task_count=count)
+
         # Alterna visibilidade baseado na quantidade de tarefas
         if count > 0:
             self.main_stack.set_visible_child_name("list")
         else:
             self.empty_page.set_icon_name(self.current_session_icon)
+            self.empty_page.set_title(f"Nada em {self.current_session_name} ainda")
             self.main_stack.set_visible_child_name("empty")
 
     def on_add_task(self, *args):
@@ -435,4 +466,14 @@ class TodoWindow(Adw.ApplicationWindow):
         """
         self.list_box.remove(row)
         if not self.list_box.get_first_child():
-             self.main_stack.set_visible_child_name("empty")
+            self.empty_page.set_icon_name(self.current_session_icon)
+            self.empty_page.set_title(f"Nada em {self.current_session_name} ainda")
+            self.update_header_context(task_count=0)
+            self.main_stack.set_visible_child_name("empty")
+        else:
+            remaining = 0
+            child = self.list_box.get_first_child()
+            while child:
+                remaining += 1
+                child = child.get_next_sibling()
+            self.update_header_context(task_count=remaining)
