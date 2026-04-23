@@ -11,6 +11,8 @@ implementacao, empacotamento, validacao e documentacao.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-23
+
 ### Added
 
 - Criado `docs/plans/000-desktop/` como desktop operacional para inbox e backlog geral.
@@ -24,6 +26,11 @@ implementacao, empacotamento, validacao e documentacao.
 - Atualizados links entre os dois artigos editoriais.
 - Removida a duplicacao do titulo da lista no corpo da janela, concentrando o contexto no `Adw.HeaderBar`.
 - Atualizados `README.md` e `docs/knowledge/ui-ux-patterns.md` para refletir o comportamento atual da interface.
+
+### Validated
+
+- Validado `appstreamcli validate --no-net` para o metainfo AppStream apos o bump para `0.1.1`.
+- Validado `git diff --check` no fechamento da release patch.
 
 ## [0.1.0] - 2026-04-23
 
@@ -145,6 +152,7 @@ experimento antes da primeira release `0.1.0` e antes da tag publica.
 - A etapa final revelou um limite importante: uma IA anterior tentou corrigir o bundle introduzindo downloads em tempo de empacotamento, o que motivou a consolidacao de um pipeline mais deterministico.
 - A principal decisao arquitetural do fechamento foi tratar Flatpak como formato oficial de distribuicao e PyInstaller apenas como conveniencia local.
 
-[Unreleased]: https://github.com/vitordevsp/todolist-gtk/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vitordevsp/todolist-gtk/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/vitordevsp/todolist-gtk/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/vitordevsp/todolist-gtk/compare/85f94fb...v0.1.0
 [0.0.0]: https://github.com/vitordevsp/todolist-gtk/commit/85f94fb

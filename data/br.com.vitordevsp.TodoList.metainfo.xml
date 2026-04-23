@@ -20,6 +20,11 @@
   </screenshots>
   <url type="homepage">https://github.com/vitordevsp/todolist-gtk</url>
   <releases>
+    <release version="0.1.1" date="2026-04-23" type="stable">
+      <description>
+        <p>Release patch com evolucao documental, artigos em curadoria e um header contextual para a lista ativa.</p>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-04-23" type="stable">
       <description>
         <p>Primeira release curável do experimento TodoList GTK, com base funcional, documentação operacional e estrutura editorial inicial.</p>
