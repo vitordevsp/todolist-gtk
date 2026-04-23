@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.vitordevsp.TodoList</id>
+  <id>br.com.vitordevsp.TodoList</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Todo List GTK</name>
@@ -12,7 +12,7 @@
       suas listas e tarefas diárias no Linux.
     </p>
   </description>
-  <launchable type="desktop-id">com.vitordevsp.TodoList.desktop</launchable>
+  <launchable type="desktop-id">br.com.vitordevsp.TodoList.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/vitordevsp/todolist-gtk/main/screenshots/main.png</image>

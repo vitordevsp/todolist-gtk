@@ -1,0 +1,40 @@
+app-id: br.com.vitordevsp.TodoList
+runtime: org.gnome.Platform
+runtime-version: '46'
+sdk: org.gnome.Sdk
+command: todolist-gtk
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+
+modules:
+  - name: todolist-gtk
+    buildsystem: simple
+    build-commands:
+      - install -D todolist-gtk /app/bin/todolist-gtk
+      - install -D main.py /app/share/todolist-gtk/src/main.py
+      - install -D window.py /app/share/todolist-gtk/src/window.py
+      - install -D models.py /app/share/todolist-gtk/src/models.py
+      - install -D style.css /app/share/todolist-gtk/src/styles/style.css
+      - install -D br.com.vitordevsp.TodoList.desktop /app/share/applications/br.com.vitordevsp.TodoList.desktop
+      - install -D br.com.vitordevsp.TodoList.svg /app/share/icons/hicolor/scalable/apps/br.com.vitordevsp.TodoList.svg
+      - install -D br.com.vitordevsp.TodoList.metainfo.xml /app/share/metainfo/br.com.vitordevsp.TodoList.metainfo.xml
+    sources:
+      - type: file
+        path: bin/todolist-gtk
+      - type: file
+        path: src/main.py
+      - type: file
+        path: src/window.py
+      - type: file
+        path: src/models.py
+      - type: file
+        path: src/styles/style.css
+      - type: file
+        path: data/br.com.vitordevsp.TodoList.desktop
+      - type: file
+        path: data/br.com.vitordevsp.TodoList.svg
+      - type: file
+        path: data/br.com.vitordevsp.TodoList.metainfo.xml
