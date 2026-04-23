@@ -10,8 +10,8 @@ sustentar artigos futuros.
 - `git log --oneline --decorate --reverse --all`
 - `CHANGELOG.md`
 - `README.md`
-- `docs/plans/v1_todolist/logs.md`
-- `docs/plans/v1_todolist/plan.md`
+- `docs/plans/001-v1-todolist/logs.md`
+- `docs/plans/001-v1-todolist/plan.md`
 - conversa Antigravity/Gemini:
   `/home/vitordevsp/.gemini/antigravity/brain/16b54b2c-7810-4127-8837-9681a0103cf4/`
 

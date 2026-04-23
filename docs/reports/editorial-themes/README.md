@@ -24,7 +24,7 @@ testar UI, persistencia, empacotamento, docs e colaboracao humano-IA.
 
 Sinais:
 
-- `docs/plans/v1_todolist/plan.md`: regra contra downloads em bundle;
+- `docs/plans/001-v1-todolist/plan.md`: regra contra downloads em bundle;
 - `docs/knowledge/bundle-manual.md`: contrato de build deterministico;
 - `Makefile`: `--disable-download` no fluxo de bundle.
 
@@ -37,7 +37,7 @@ reprodutibilidade, sandbox, runtime e instalacao.
 
 Sinais:
 
-- `docs/plans/v1_todolist/`: perguntas, tarefas, logs e criterios;
+- `docs/plans/001-v1-todolist/`: perguntas, tarefas, logs e criterios;
 - `docs/knowledge/`: guias tecnicos criados a partir de aprendizados;
 - `docs/README.md`: `docs/` como instancia reduzida do `studio-coding`.
 

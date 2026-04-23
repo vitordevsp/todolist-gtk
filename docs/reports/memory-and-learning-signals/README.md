@@ -9,7 +9,7 @@ materia-prima editorial de detalhes operacionais.
 
 - `MEMORY.md`
 - `CHANGELOG.md`
-- `docs/plans/v1_todolist/logs.md`
+- `docs/plans/001-v1-todolist/logs.md`
 - `docs/knowledge/*`
 
 ## Aprendizados Com Potencial Editorial
@@ -45,7 +45,7 @@ pequenas decisoes incorretas aparecem rapido.
 Sinais:
 
 - `MEMORY.md`: diferencia binario PyInstaller de bundle Flatpak;
-- `docs/plans/v1_todolist/logs.md`: registra bundle final sem downloads;
+- `docs/plans/001-v1-todolist/logs.md`: registra bundle final sem downloads;
 - `CHANGELOG.md`: registra a separacao entre PyInstaller local e Flatpak oficial.
 
 Possivel uso:
@@ -57,8 +57,8 @@ Artigo tecnico sobre empacotamento Linux e a distancia entre "rodou aqui" e
 
 Sinais:
 
-- `docs/plans/v1_todolist/questions.md`: decisoes humanas registradas;
-- `docs/plans/v1_todolist/logs.md`: explica mudancas de rota;
+- `docs/plans/001-v1-todolist/questions.md`: decisoes humanas registradas;
+- `docs/plans/001-v1-todolist/logs.md`: explica mudancas de rota;
 - `docs/knowledge/project-structure.md`: registra convencoes que nasceram no
   meio da implementacao;
 - `docs/README.md`: assume a camada como mini-framework `studio-coding`.

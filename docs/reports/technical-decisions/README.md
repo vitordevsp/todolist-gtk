@@ -39,7 +39,7 @@ se a IA entende experiencia, e nao so sintaxe.
 Sinais:
 
 - `MEMORY.md`: registra migracao de schema SQLite;
-- `docs/plans/v1_todolist/questions.md`: decisao humana sobre persistencia;
+- `docs/plans/001-v1-todolist/questions.md`: decisao humana sobre persistencia;
 - `docs/knowledge/persistence-and-xdg.md`: consolida comportamento final;
 - commit `c352d8d`: ajusta persistencia para `GLib.get_user_data_dir()`.
 
@@ -55,7 +55,7 @@ Sinais:
 - `README.md`: separa binario local, instalacao Flatpak e bundle;
 - `docs/knowledge/bundle-manual.md`: define contrato de bundle;
 - commit `6ddc40c`: torna bundle deterministico;
-- `docs/plans/v1_todolist/logs.md`: registra que PyInstaller dentro do Flatpak
+- `docs/plans/001-v1-todolist/logs.md`: registra que PyInstaller dentro do Flatpak
   gerou risco tecnico.
 
 Potencial editorial:
@@ -68,7 +68,7 @@ Este e um dos melhores arcos narrativos: a diferenca entre "gerar um binario" e
 Sinais:
 
 - `Makefile`: usa `--disable-download` e `--disable-rofiles-fuse`;
-- `docs/plans/v1_todolist/plan.md`: explicita regra contra `pip install`,
+- `docs/plans/001-v1-todolist/plan.md`: explicita regra contra `pip install`,
   `curl`, `wget`, `flatpak remote-add` e downloads inesperados no bundle;
 - log final de instalacao: app instalado a partir de remoto local `todolist-origin`.
 

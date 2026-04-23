@@ -12,8 +12,8 @@ instancia operacional do framework `studio-coding`.
 Sinais:
 
 - `docs/patterns/plan-patterns.md`: define `plan.md`, `tasks.md` e `logs.md`;
-- `docs/plans/v1_todolist/`: aplica o padrao com `questions.md` adicional;
-- `docs/plans/v1_todolist/logs.md`: registra mudancas, decisoes e validacoes.
+- `docs/plans/001-v1-todolist/`: aplica o padrao com `questions.md` adicional;
+- `docs/plans/001-v1-todolist/logs.md`: registra mudancas, decisoes e validacoes.
 
 Leitura editorial:
 
