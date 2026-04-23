@@ -34,3 +34,9 @@ no `logs.md` do plano correspondente.
 - Atualizado o header da janela principal para exibir lista ativa, icone da sessao e contagem de tarefas.
 - Removida a duplicacao do titulo da lista dentro do corpo do conteudo principal.
 - Ajustados `README.md` e `docs/knowledge/ui-ux-patterns.md` para refletir o comportamento real do header e do estado vazio.
+
+## 2026-04-23 - Organizacao editorial final
+
+- Movidos `artigo_experiencia_ai.md` e `artigo_tecnico_linux_gtk.md` da raiz para `docs/reports/article-candidates/`.
+- Atualizado `docs/articles/README.md` para tratar `articles/` como camada de artigos finalizados e apontar rascunhos para `reports/article-candidates/`.
+- Adicionado frontmatter editorial aos dois artigos finais com status, versao, autores, serie e metadados de manutencao.

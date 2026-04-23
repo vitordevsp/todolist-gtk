@@ -9,7 +9,7 @@
 
 ## Rascunho Base
 
-- [`artigo_tecnico_linux_gtk.md`](../../../../artigo_tecnico_linux_gtk.md)
+- [`artigo_tecnico_linux_gtk.md`](../../../reports/article-candidates/artigo_tecnico_linux_gtk.md)
 
 ## Grupo Original do Relatorio de Candidatos
 

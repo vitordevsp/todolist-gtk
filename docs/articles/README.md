@@ -1,15 +1,15 @@
 # Articles
 
-Esta pasta e a camada editorial futura do framework neste projeto.
+Esta pasta guarda os artigos editoriais ja finalizados neste projeto.
 
-Ela deve guardar artigos finais ou rascunhos editoriais prontos para virar posts
-de blog. No momento, a regra e simples: **nao gerar artigos finais antes da
-curadoria em `docs/reports/article-candidates/`**.
+Os rascunhos, variantes e candidatos continuam fora daqui, principalmente em
+`docs/reports/article-candidates/`. Aqui devem ficar apenas os textos que ja
+passaram pela curadoria e foram fechados como versao editorial estavel.
 
 ## Papel
 
-Use `articles/` apenas quando um texto ja tiver sido aprovado para sair do modo
-relatorio e virar post.
+Use `articles/` quando um texto ja tiver sido aprovado para sair do modo
+relatorio e virar artigo final.
 
 Antes disso, a investigacao deve passar por:
 
@@ -21,16 +21,28 @@ Antes disso, a investigacao deve passar por:
 
 ## Regras Para Artigos Finais
 
+- Frontmatter obrigatorio com metadados editoriais.
 - Formato de post de blog.
 - Contexto real do projeto preservado.
 - Sinais cruzados entre commits, docs, memoria, planos e conversas.
 - Sem tratar uma unica fonte como verdade absoluta.
 - Rodape informando coautoria entre Vitor Sampaio e Codex.
+- `version` deve indicar o estado editorial do texto.
 
-## Artigos Em Curadoria
+## Artigos Finalizados
 
-- [`experiencia-desenvolvimento-ia-sem-dominar-stack.md`](./experiencia-desenvolvimento-ia-sem-dominar-stack.md): relato sobre construir um app Linux nativo guiando IA sem dominar previamente a stack. Aguarda curadoria humana.
-- [`linux-gtk-flatpak-com-ia.md`](./linux-gtk-flatpak-com-ia.md): tutorial tecnico sobre estruturar, persistir, empacotar e testar um app Python/GTK4/Libadwaita com Flatpak. Aguarda curadoria humana.
+- [`experiencia-desenvolvimento-ia-sem-dominar-stack.md`](./experiencia-desenvolvimento-ia-sem-dominar-stack.md): artigo de experiencia sobre conduzir o desenvolvimento do app com apoio de IA. Status final `1.0.0`.
+- [`linux-gtk-flatpak-com-ia.md`](./linux-gtk-flatpak-com-ia.md): artigo tecnico sobre estrutura, persistencia e empacotamento do app. Status final `1.0.0`.
+
+## Rascunhos e Variantes
+
+Rascunhos gerados durante a pesquisa editorial nao devem ficar na raiz do
+repositorio.
+
+Os dois rascunhos sinteticos gerados no fluxo Gemini foram preservados em:
+
+- [`../reports/article-candidates/artigo_experiencia_ai.md`](../reports/article-candidates/artigo_experiencia_ai.md)
+- [`../reports/article-candidates/artigo_tecnico_linux_gtk.md`](../reports/article-candidates/artigo_tecnico_linux_gtk.md)
 
 ## Rodape Padrao
 

@@ -185,7 +185,7 @@ Observacoes e direcao editorial humana:
 
 Arquivo:
 
-- [`artigo_tecnico_linux_gtk.md`](../../../artigo_tecnico_linux_gtk.md)
+- [`artigo_tecnico_linux_gtk.md`](./artigo_tecnico_linux_gtk.md)
 
 Diagnostico editorial:
 
@@ -396,7 +396,7 @@ Observacoes e direcao editorial humana:
 
 Arquivo:
 
-- [`artigo_experiencia_ai.md`](../../../artigo_experiencia_ai.md)
+- [`artigo_experiencia_ai.md`](./artigo_experiencia_ai.md)
 
 Diagnostico editorial:
 

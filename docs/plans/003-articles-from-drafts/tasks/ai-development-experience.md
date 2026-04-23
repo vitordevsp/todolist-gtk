@@ -9,7 +9,7 @@
 
 ## Rascunho Base
 
-- [`artigo_experiencia_ai.md`](../../../../artigo_experiencia_ai.md)
+- [`artigo_experiencia_ai.md`](../../../reports/article-candidates/artigo_experiencia_ai.md)
 
 ## Grupo Original do Relatorio de Candidatos
 

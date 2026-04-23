@@ -30,8 +30,8 @@ Este plano nao cobre:
 - [`docs/reports/technical-decisions/README.md`](../../reports/technical-decisions/README.md)
 - [`docs/reports/memory-and-learning-signals/README.md`](../../reports/memory-and-learning-signals/README.md)
 - [`docs/reports/docs-framework-evolution/README.md`](../../reports/docs-framework-evolution/README.md)
-- [`artigo_tecnico_linux_gtk.md`](../../../artigo_tecnico_linux_gtk.md)
-- [`artigo_experiencia_ai.md`](../../../artigo_experiencia_ai.md)
+- [`artigo_tecnico_linux_gtk.md`](../../reports/article-candidates/artigo_tecnico_linux_gtk.md)
+- [`artigo_experiencia_ai.md`](../../reports/article-candidates/artigo_experiencia_ai.md)
 
 ## 4. Direcao Editorial Geral
 
