@@ -1,10 +1,30 @@
+---
+title: Do zero ao Flatpak: criando um app nativo para Linux com Python e GTK
+description: Tutorial pratico mostrando como criar, estruturar e distribuir um aplicativo desktop nativo para Linux usando Python, GTK4, Libadwaita, SQLite e Flatpak.
+status: final
+version: 1.0.0
+authors:
+  - Vitor Sampaio
+  - Codex (GPT-5.4)
+  - Gemini 3 Flash
+article_type: tecnico
+series: TodoList GTK editorial
+part: 2
+source_project: TodoList GTK
+source_path: docs/articles/linux-gtk-flatpak-com-ia.md
+created_at: 2026-04-23 13:18
+last_updated: 2026-04-23 13:18
+tags:
+  - python
+  - gtk
+  - linux
+  - desktop
+  - flatpak
+  - desenvolvimento
+  - tutorial
+---
+
 # Do zero ao Flatpak: criando um app nativo para Linux com Python e GTK
-
-Descricao: Tutorial pratico mostrando como criar, estruturar e distribuir um
-aplicativo desktop nativo para Linux usando Python, GTK4, Libadwaita, SQLite e
-Flatpak.
-
-Tags: python, gtk, linux, desktop, flatpak, desenvolvimento, tutorial
 
 ## Antes: o relato da experiencia
 

@@ -1,8 +1,30 @@
+---
+title: IA nao fez o app sozinha, mas mudou tudo
+description: Relato sobre a experiencia de construir um aplicativo desktop Linux usando IA como parceira de desenvolvimento, explorando processo, aprendizado e mudanca de paradigma.
+status: final
+version: 1.0.0
+authors:
+  - Vitor Sampaio
+  - Codex (GPT-5.4)
+  - Gemini 3 Flash
+article_type: experiencia
+series: TodoList GTK editorial
+part: 1
+source_project: TodoList GTK
+source_path: docs/articles/experiencia-desenvolvimento-ia-sem-dominar-stack.md
+created_at: 2026-04-23 13:18
+last_updated: 2026-04-23 13:18
+tags:
+  - IA
+  - desenvolvimento
+  - produtividade
+  - linux
+  - programacao
+  - engenharia de software
+  - llm
+---
+
 # IA não fez o app sozinha — mas mudou tudo
-
-Descricao: Relato sobre a experiencia de construir um aplicativo desktop Linux usando IA como parceira de desenvolvimento, explorando processo, aprendizado e mudanca de paradigma.
-
-Tags: IA, desenvolvimento, produtividade, linux, programacao, engenharia de software, llm
 
 ## Continuação técnica
 
