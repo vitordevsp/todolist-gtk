@@ -8,7 +8,20 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, Gdk
-from .models import TodoModel
+
+try:
+    from .models import TodoModel
+except ImportError:
+    from models import TodoModel
+
+SESSION_ICON_RULES = (
+    ("user-home-symbolic", ("casa", "home", "lar")),
+    ("x-office-document-symbolic", ("trabalho", "work", "job", "office")),
+    ("applications-science-symbolic", ("estudo", "study", "escola", "school", "curso")),
+    ("applications-science-symbolic", ("saude", "saúde", "health", "gym", "treino")),
+    ("folder-download-symbolic", ("compra", "compras", "buy", "shop", "mercado")),
+    ("starred-symbolic", ("favorito", "favoritos", "fav", "star", "estrela")),
+)
 
 class TodoRow(Adw.ActionRow):
     """Representa uma linha individual de tarefa na lista.
@@ -308,17 +321,25 @@ class TodoWindow(Adw.ApplicationWindow):
             name (str): Nome fornecido pelo usuario no dialogo.
         """
         if name.strip():
-            # Atribuicao de icones baseada em palavras-chave
-            icon = "view-list-symbolic"
-            lower_name = name.lower()
-            if "casa" in lower_name or "home" in lower_name: icon = "user-home-symbolic"
-            elif "trabalho" in lower_name or "work" in lower_name: icon = "briefcase-symbolic"
-            elif "compra" in lower_name or "buy" in lower_name: icon = "shopping-cart-symbolic"
-            elif "estudo" in lower_name or "study" in lower_name: icon = "education-symbolic"
-            
+            icon = self.resolve_session_icon(name)
             sid = self.model.add_session(name.strip(), icon)
             if sid:
                 self.load_sessions(select_id=sid)
+
+    def resolve_session_icon(self, name):
+        """Escolhe um icone simbolico a partir das palavras-chave da sessao.
+
+        Args:
+            name (str): Nome da sessao informado pelo usuario.
+
+        Returns:
+            str: Nome do icone simbolico usado pelo tema GTK.
+        """
+        lower_name = name.lower()
+        for icon, keywords in SESSION_ICON_RULES:
+            if any(keyword in lower_name for keyword in keywords):
+                return icon
+        return "view-list-symbolic"
 
     def on_delete_session_clicked(self, btn, sid, name):
         """Abre dialogo de confirmacao antes de apagar uma sessao inteira.

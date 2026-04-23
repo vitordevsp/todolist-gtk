@@ -8,6 +8,9 @@ import sqlite3
 import os
 from gi.repository import GLib
 
+APP_ID = 'br.com.vitordevsp.TodoList'
+DB_FILENAME = 'todos.db'
+
 class TodoModel:
     """Classe responsavel pela comunicacao com o banco de dados SQLite.
 
@@ -23,12 +26,14 @@ class TodoModel:
         if db_path is None:
             # Tenta usar a pasta de dados do usuario (XDG_DATA_HOME)
             # No Flatpak isso mapeia para a sandbox do app
-            data_dir = os.path.join(GLib.get_user_data_dir(), 'todolist-gtk')
+            data_dir = os.path.join(GLib.get_user_data_dir(), APP_ID)
             os.makedirs(data_dir, exist_ok=True)
-            self.db_path = os.path.join(data_dir, 'todos.db')
+            self.db_path = os.path.join(data_dir, DB_FILENAME)
         else:
             self.db_path = db_path
-            os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+            db_dir = os.path.dirname(self.db_path)
+            if db_dir:
+                os.makedirs(db_dir, exist_ok=True)
             
         self._init_db()
 
