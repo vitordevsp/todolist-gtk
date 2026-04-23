@@ -28,3 +28,9 @@ no `logs.md` do plano correspondente.
 - Renomeado `docs/plans/v1_todolist/` para `docs/plans/001-v1-todolist/`.
 - Renomeado `docs/plans/editorial_articles_from_project_history/` para `docs/plans/002-editorial-articles-from-project-history/`.
 - Renomeado `docs/plans/002-articles-from-drafts/` para `docs/plans/003-articles-from-drafts/`.
+
+## 2026-04-23 - Header contextual e alinhamento documental
+
+- Atualizado o header da janela principal para exibir lista ativa, icone da sessao e contagem de tarefas.
+- Removida a duplicacao do titulo da lista dentro do corpo do conteudo principal.
+- Ajustados `README.md` e `docs/knowledge/ui-ux-patterns.md` para refletir o comportamento real do header e do estado vazio.

@@ -2,13 +2,14 @@
 
 Bem-vindo ao **TodoList GTK**, um gerenciador de tarefas moderno, leve e elegante desenvolvido especificamente para o ambiente Linux usando **GTK4** e **Libadwaita**.
 
-Este projeto nasceu como um caso de teste utilizando o **Antigravity** (Codin assistant AI) e o modelo **Gemini 3 Flash** da Google DeepMind. O objetivo foi validar a capacidade da IA de construir um aplicativo desktop nativo do zero, focando em UX "premium" e boas práticas de desenvolvimento.
+Este projeto funciona como um experimento pratico de desenvolvimento assistido por IA para validar a construcao de um aplicativo desktop nativo do zero, com foco em UX consistente, empacotamento Linux e documentacao viva.
 
 ## ✨ Funcionalidades
 
 - **Layout Estilo Simplenote:** Interface de duas colunas com barra lateral para organização.
 - **Múltiplas Sessões (Listas):** Crie diferentes categorias para suas tarefas (Trabalho, Casa, Estudos, etc).
 - **Ícones Inteligentes:** O app atribui ícones automaticamente baseado no nome das suas listas.
+- **Header Contextual:** O topo da janela mostra a lista ativa, o ícone atual e a contagem de tarefas daquela sessão.
 - **Modo Live Reload:** Ambiente de desenvolvimento ágil que reinicia o app automaticamente ao salvar o código.
 - **Persistência Local:** Seus dados são salvos de forma segura em um banco de dados SQLite local.
 - **Dark Mode Nativo:** Total integração com as preferências de tema do seu sistema GNOME.
@@ -51,8 +52,8 @@ Isso criará o arquivo `todolist.flatpak` na raiz, pronto para ser enviado para 
 ---
 
 ## 🧪 Contexto do Projeto
-Este software é uma demonstração de colaboração entre humano e IA. Foi desenvolvido em tempo recorde, passando por fases de planejamento arquitetural, redesign de layout e polimento de UX, tudo mediado pelo assistente Antigravity.
+Este software e uma demonstracao de colaboracao entre humano e IA. O repositorio registra nao so o app, mas tambem planos, conhecimento tecnico, logs e relatorios que ajudam a manter o projeto evolutivo.
 
 ---
 
-Desenvolvido por **[vitordevsp](https://vitordevsp.com.br)** com auxílio do **Antigravity (Gemini 3 Flash)**.
+Desenvolvido por **[vitordevsp](https://vitordevsp.com.br)** com apoio de assistentes de IA ao longo do ciclo de planejamento, implementacao e documentacao.

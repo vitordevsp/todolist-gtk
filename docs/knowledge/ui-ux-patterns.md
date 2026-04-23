@@ -6,7 +6,8 @@ Este documento detalha as decisões de design e os padrões de interface utiliza
 
 Utilizamos o componente `Adw.Flap` como a espinha dorsal do aplicativo. Esse padrão permite que a interface seja adaptável:
 - **Barra Lateral:** Contém as sessões (listas) do usuário.
-- **Área de Conteúdo:** Exibe as tarefas da sessão selecionada.
+- **HeaderBar Contextual:** Mostra a lista ativa, seu ícone e a contagem de tarefas da sessão selecionada.
+- **Área de Conteúdo:** Exibe o campo de captura e a lista de tarefas da sessão selecionada.
 - **Comportamento:** O flap pode ser ocultado ou revelado, facilitando o uso em telas menores ou focando na tarefa atual.
 
 ## 2. Sistema de Ícones Inteligentes
@@ -26,15 +27,15 @@ Para dar personalidade ao app sem exigir que o usuário escolha ícones manualme
 ## 3. Estados Vazios (Empty States)
 
 Um bom app nunca mostra uma tela branca e fria. Usamos o `Adw.StatusPage` para guiar o usuário:
-- **Sem Sessões:** "Bem-vindo! Crie sua primeira lista para começar."
-- **Lista Vazia:** "Tudo pronto! Clique no + para adicionar uma tarefa."
+- **Sem tarefas na lista ativa:** O estado vazio herda o ícone da sessão selecionada.
+- **Título contextual:** A mensagem segue o formato `Nada em <nome da lista> ainda`.
+- **Descrição fixa:** "Adicione sua primeira tarefa no campo acima!"
 
 ## 4. Estilização CSS Customizada
 
 Embora o Libadwaita forneça a base, usamos o `src/styles/style.css` para:
-- Adicionar bordas suaves e arredondadas.
-- Criar efeitos de hover nas linhas de tarefas.
-- Garantir que a tipografia esteja bem legível tanto no Light quanto no Dark mode.
+- Aplicar o estado visual de tarefa concluída com texto riscado.
+- Reduzir a opacidade de tarefas concluídas sem quebrar o tema nativo.
 
 O CSS fica em `src/styles/` porque pertence a implementacao visual da aplicacao. Arquivos em `data/` ficam reservados para metadados consumidos pelo desktop Linux, como `.desktop`, AppStream/metainfo e icone.
 

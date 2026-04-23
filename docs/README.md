@@ -39,7 +39,7 @@ Para entender o produto:
 
 1. Leia [`../README.md`](../README.md).
 2. Leia o plano ativo em [`plans/001-v1-todolist/plan.md`](./plans/001-v1-todolist/plan.md).
-3. Consulte [`knowledge/`](./knowledge/README.md) conforme a area tocada.
+3. Consulte [`knowledge/`](./knowledge/README.md) conforme a area tocada, especialmente UI, persistencia e empacotamento.
 
 Para continuar uma frente de trabalho:
 

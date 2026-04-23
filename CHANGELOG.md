@@ -15,12 +15,15 @@ implementacao, empacotamento, validacao e documentacao.
 
 - Criado `docs/plans/000-desktop/` como desktop operacional para inbox e backlog geral.
 - Criados dois artigos em curadoria em `docs/articles/`: relato de experiencia com IA e tutorial tecnico Python/GTK/Flatpak.
+- Header contextual na janela principal com lista ativa, icone da sessao e contagem de tarefas.
 
 ### Changed
 
 - Renumerados os planos para a taxonomia `000`, `001`, `002` e `003`.
 - Movidos `todolist.md` e `backlog.md` para `docs/plans/000-desktop/`.
 - Atualizados links entre os dois artigos editoriais.
+- Removida a duplicacao do titulo da lista no corpo da janela, concentrando o contexto no `Adw.HeaderBar`.
+- Atualizados `README.md` e `docs/knowledge/ui-ux-patterns.md` para refletir o comportamento atual da interface.
 
 ## [0.1.0] - 2026-04-23
 
