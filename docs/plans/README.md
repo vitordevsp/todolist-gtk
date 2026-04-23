@@ -9,10 +9,10 @@ retomar a frente sem depender apenas do chat anterior.
 
 ## Estrutura
 
-- [`v1_todolist/`](./v1_todolist/): plano principal da consolidacao da v1.
-- [`editorial_articles_from_project_history/`](./editorial_articles_from_project_history/plan.md): frente editorial para transformar a historia real do projeto em reports, candidatos e artigos futuros.
-- [`backlog.md`](./backlog.md): ideias futuras fora do fechamento atual.
-- [`todolist.md`](./todolist.md): inbox simples para notas soltas antes de virarem plano ou backlog.
+- [`000-desktop/`](./000-desktop/plan.md): entrada operacional para inbox e backlog geral.
+- [`001-v1-todolist/`](./001-v1-todolist/): plano principal da consolidacao da v1.
+- [`002-editorial-articles-from-project-history/`](./002-editorial-articles-from-project-history/plan.md): frente editorial para transformar a historia real do projeto em reports, candidatos e artigos futuros.
+- [`003-articles-from-drafts/`](./003-articles-from-drafts/plan.md): execucao focada na reescrita dos dois rascunhos iniciais de artigos.
 
 ## Plano Como Pasta
 

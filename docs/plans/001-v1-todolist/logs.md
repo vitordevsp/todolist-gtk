@@ -1,4 +1,4 @@
-# Log de Alterações do Plano (v1_todolist)
+# Log de Alterações do Plano (001-v1-todolist)
 
 Este arquivo registra as principais mudanças e decisões tomadas durante a execução deste plano.
 
@@ -11,7 +11,7 @@ Este arquivo registra as principais mudanças e decisões tomadas durante a exec
 ## [2026-04-21] - Empacotamento e Manuais de Conhecimento
 - Criação do manual completo de empacotamento em `docs/knowledge/bundle-manual.md`.
 - Inclusão de seções de Debug e Gerenciamento de Dependências (Pip).
-- Movimentação do `backlog.md` para a raiz da pasta de planos.
+- Movimentação inicial do `backlog.md` para a camada de planos.
 - Consolidação de aprendizados sobre `libpython` e Bundles `.flatpak` no `AGENTS.md` e `MEMORY.md`.
 
 ## [2026-04-22] - Consolidação Final e Identidade Brasileira
@@ -51,3 +51,8 @@ Este arquivo registra as principais mudanças e decisões tomadas durante a exec
 - Permissões exibidas na instalação: `ipc`, `fallback-x11`, `wayland`, `x11` e `dri`.
 - Confirmado novamente o aviso de fim de vida do runtime `org.gnome.Platform//46`.
 - Observado também aviso de fim de vida para runtimes GL `org.freedesktop.Platform.GL.default//23.08` e `23.08-extra`; essa pendência fica agrupada na futura migração para um runtime GNOME suportado.
+
+## [2026-04-23] - Renumeração do sistema de planos
+- Plano renomeado de `v1_todolist` para `001-v1-todolist`.
+- `backlog.md` e `todolist.md` movidos para `docs/plans/000-desktop/`.
+- Mantida esta pasta como plano principal da consolidação da v1.

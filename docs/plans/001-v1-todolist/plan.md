@@ -55,8 +55,11 @@ todolist-gtk/
 │   ├── knowledge/                      # Guias tecnicos do projeto
 │   ├── patterns/                       # Padroes de documentacao
 │   └── plans/
-│       ├── backlog.md
-│       └── v1_todolist/
+│       ├── 000-desktop/
+│       │   ├── plan.md
+│       │   ├── todolist.md
+│       │   └── backlog.md
+│       └── 001-v1-todolist/
 │           ├── plan.md
 │           ├── tasks.md
 │           ├── logs.md

@@ -17,6 +17,14 @@ no `logs.md` do plano correspondente.
 
 - Criado `docs/articles/` como camada futura de artigos finais ou rascunhos aprovados.
 - Criado `docs/reports/` como camada intermediaria para investigacao, sintese e curadoria.
-- Criado plano `docs/plans/editorial_articles_from_project_history/`.
+- Criado plano `docs/plans/002-editorial-articles-from-project-history/`.
 - Criados reports iniciais para linha do tempo, decisoes tecnicas, evolucao documental, memoria, conversas, temas editoriais e candidatos a artigos.
 - Atualizada a taxonomia: `reports/` e `articles/` agora existem porque ha uso real nesta frente.
+
+## 2026-04-23 - Renumeracao dos planos
+
+- Criado `docs/plans/000-desktop/` como entrada operacional para inbox e backlog.
+- Movidos `todolist.md` e `backlog.md` para `docs/plans/000-desktop/`.
+- Renomeado `docs/plans/v1_todolist/` para `docs/plans/001-v1-todolist/`.
+- Renomeado `docs/plans/editorial_articles_from_project_history/` para `docs/plans/002-editorial-articles-from-project-history/`.
+- Renomeado `docs/plans/002-articles-from-drafts/` para `docs/plans/003-articles-from-drafts/`.

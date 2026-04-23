@@ -11,7 +11,16 @@ implementacao, empacotamento, validacao e documentacao.
 
 ## [Unreleased]
 
-Nenhuma mudanca registrada ainda.
+### Added
+
+- Criado `docs/plans/000-desktop/` como desktop operacional para inbox e backlog geral.
+- Criados dois artigos em curadoria em `docs/articles/`: relato de experiencia com IA e tutorial tecnico Python/GTK/Flatpak.
+
+### Changed
+
+- Renumerados os planos para a taxonomia `000`, `001`, `002` e `003`.
+- Movidos `todolist.md` e `backlog.md` para `docs/plans/000-desktop/`.
+- Atualizados links entre os dois artigos editoriais.
 
 ## [0.1.0] - 2026-04-23
 
@@ -27,13 +36,13 @@ futuros.
 - Criacao da frente editorial para transformar a historia real do projeto em reports, candidatos e futuros artigos.
 - Criacao de `docs/articles/` como destino futuro para artigos finais ou rascunhos aprovados.
 - Criacao de `docs/reports/` como camada intermediaria de investigacao e curadoria.
-- Criacao do plano `docs/plans/editorial_articles_from_project_history/`.
+- Criacao do plano `docs/plans/002-editorial-articles-from-project-history/`.
 - Criacao do relatorio final `docs/reports/article-candidates/` com checkboxes, direcionamento, sinais e campo de observacao humana.
 - Criacao de indices minimos para `docs/`, `docs/knowledge/`, `docs/patterns/` e `docs/plans/`.
 
 ### Changed
 
-- Atualizado `docs/plans/todolist.md` para funcionar como inbox simples de planos.
+- Atualizado `docs/plans/000-desktop/todolist.md` para funcionar como inbox simples de planos.
 - Atualizado `docs/README.md` para incluir `reports/` e `articles/` como camadas reais do recorte `studio-coding`.
 - Atualizado o metainfo AppStream para declarar `0.1.0` como release atual.
 
@@ -97,7 +106,7 @@ experimento antes da primeira release `0.1.0` e antes da tag publica.
 
 ### Documented
 
-- Criado plano `docs/plans/v1_todolist/` com `plan.md`, `tasks.md`, `logs.md` e `questions.md`.
+- Criado plano `docs/plans/001-v1-todolist/` com `plan.md`, `tasks.md`, `logs.md` e `questions.md`.
 - Registradas perguntas de decisao humana sobre persistencia, migracao de banco antigo e escopo de icones inteligentes.
 - Criado `docs/knowledge/environment-setup.md` com setup de ferramentas, runtime/SDK Flatpak e comandos de verificacao.
 - Criado `docs/knowledge/bundle-manual.md` com contrato de bundle deterministico, fluxo interno e ciclo completo de instalacao/desinstalacao.

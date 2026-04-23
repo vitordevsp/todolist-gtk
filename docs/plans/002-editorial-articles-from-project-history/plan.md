@@ -53,7 +53,7 @@ Fontes de primeira rodada:
 - `docs/README.md`;
 - `docs/knowledge/`;
 - `docs/patterns/`;
-- `docs/plans/v1_todolist/`;
+- `docs/plans/001-v1-todolist/`;
 - conversa atual com Codex;
 - conversa Antigravity/Gemini em `/home/vitordevsp/.gemini/antigravity/brain/16b54b2c-7810-4127-8837-9681a0103cf4/`.
 

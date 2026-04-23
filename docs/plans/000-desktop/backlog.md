@@ -1,4 +1,4 @@
-# Backlog e Ideias Futuras (v1_todolist)
+# Backlog e Ideias Futuras
 
 Este arquivo registra desejos, melhorias e funcionalidades que foram idealizadas durante o desenvolvimento, mas que ficaram fora do escopo da Versão 1.0.
 

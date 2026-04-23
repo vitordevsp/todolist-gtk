@@ -38,7 +38,7 @@ real neste projeto.
 Para entender o produto:
 
 1. Leia [`../README.md`](../README.md).
-2. Leia o plano ativo em [`plans/v1_todolist/plan.md`](./plans/v1_todolist/plan.md).
+2. Leia o plano ativo em [`plans/001-v1-todolist/plan.md`](./plans/001-v1-todolist/plan.md).
 3. Consulte [`knowledge/`](./knowledge/README.md) conforme a area tocada.
 
 Para continuar uma frente de trabalho:
@@ -55,7 +55,7 @@ Para registrar conhecimento aprendido:
 
 Para transformar a historia do projeto em artigos:
 
-1. Comece pelo plano [`editorial_articles_from_project_history`](./plans/editorial_articles_from_project_history/plan.md).
+1. Comece pelo plano [`002-editorial-articles-from-project-history`](./plans/002-editorial-articles-from-project-history/plan.md).
 2. Consulte os relatorios em [`reports/`](./reports/README.md).
 3. Curadoria final acontece em [`reports/article-candidates/`](./reports/article-candidates/README.md).
 4. So gere artigos em [`articles/`](./articles/README.md) quando houver pedido explicito.

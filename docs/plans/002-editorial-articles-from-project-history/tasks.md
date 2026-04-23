@@ -3,7 +3,7 @@
 ## Etapa 1: Estruturar a Frente
 
 - [x] Avaliar se a frente merece plano.
-- [x] Criar plano estruturado em `docs/plans/editorial_articles_from_project_history/`.
+- [x] Criar plano estruturado em `docs/plans/002-editorial-articles-from-project-history/`.
 - [x] Criar `docs/articles/` como destino futuro de artigos.
 - [x] Criar `docs/reports/` como camada intermediaria de analise.
 - [x] Atualizar indices da camada `docs/`.
