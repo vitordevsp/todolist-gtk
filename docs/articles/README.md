@@ -13,7 +13,7 @@ relatorio e virar post.
 
 Antes disso, a investigacao deve passar por:
 
-1. `docs/plans/editorial_articles_from_project_history/`
+1. `docs/plans/002-editorial-articles-from-project-history/`
 2. `docs/reports/`
 3. `docs/reports/article-candidates/`
 4. curadoria humana
@@ -26,6 +26,11 @@ Antes disso, a investigacao deve passar por:
 - Sinais cruzados entre commits, docs, memoria, planos e conversas.
 - Sem tratar uma unica fonte como verdade absoluta.
 - Rodape informando coautoria entre Vitor Sampaio e Codex.
+
+## Artigos Em Curadoria
+
+- [`experiencia-desenvolvimento-ia-sem-dominar-stack.md`](./experiencia-desenvolvimento-ia-sem-dominar-stack.md): relato sobre construir um app Linux nativo guiando IA sem dominar previamente a stack. Aguarda curadoria humana.
+- [`linux-gtk-flatpak-com-ia.md`](./linux-gtk-flatpak-com-ia.md): tutorial tecnico sobre estruturar, persistir, empacotar e testar um app Python/GTK4/Libadwaita com Flatpak. Aguarda curadoria humana.
 
 ## Rodape Padrao
 
