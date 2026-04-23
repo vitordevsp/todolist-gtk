@@ -16,8 +16,8 @@ Este projeto nasceu como um caso de teste utilizando o **Antigravity** (Codin as
 ## 🚀 Como Executar
 
 ### Pré-requisitos
-- Python 3
-- GTK4 e Libadwaita instalados no sistema
+O projeto depende de algumas bibliotecas de sistema (GTK4, Libadwaita, Python Dev).
+👉 **Veja o [Guia de Configuração de Ambiente](docs/knowledge/environment-setup.md)** para preparar sua máquina.
 
 ### Rodando o Projeto
 1. Clone o repositório.
@@ -32,50 +32,21 @@ make dev
 
 ## 🏗️ Como funciona o Build
 
-O processo de build utiliza o **PyInstaller** para transformar o código Python em um executável binário nativo.
-- **Empacotamento:** O comando `make build` agrupa o interpretador Python, as bibliotecas necessárias e os arquivos de estilo (`data/`) em um único arquivo na pasta `dist/`.
-- **Portabilidade:** Esse binário é autônomo (não precisa do código fonte para rodar), mas depende que o sistema operacional de destino tenha as bibliotecas do **GTK4** e **Libadwaita** instaladas (o que é padrão na maioria das distros focadas em GNOME como Ubuntu, Fedora e Pop!_OS).
+O projeto mantém dois fluxos separados:
+- **Binário Local:** `make build` gera um executável em `dist/` com PyInstaller para testes rápidos.
+- **Instalação Flatpak:** `make flatpak` instala o app no seu menu de aplicativos usando o runtime GNOME.
+- **Geração de Bundle:** `make bundle` gera o arquivo `todolist.flatpak` portável na raiz, sem usar o binário PyInstaller.
 
-## 📥 Instalação e Atualização
+## 📦 Distribuição Oficial (Flatpak)
 
-### Instalação Manual
-Se você deseja "instalar" o app no seu sistema para que ele apareça no seu menu de aplicativos, siga estes passos:
+O ID oficial do aplicativo é **br.com.vitordevsp.TodoList**. Para gerar o instalador final:
 
-1.  **Gere o binário:**
+1.  Certifique-se de ter o `flatpak-builder` instalado.
+2.  Execute:
     ```bash
-    make build
+    make bundle
     ```
-2.  **Mova para seus binários locais:**
-    ```bash
-    mkdir -p ~/.local/bin
-    cp dist/todolist-gtk ~/.local/bin/
-    ```
-3.  **Crie um atalho no menu (Opcional):**
-    Você pode criar um arquivo chamado `todolist.desktop` em `~/.local/share/applications/` apontando para o binário em `~/.local/bin/todolist-gtk`.
-
-### Como Atualizar
-Para atualizar o aplicativo instalado:
-1.  Puxe as novas alterações do código fonte (ex: `git pull`).
-2.  Rode `make build` novamente.
-3.  Substitua o arquivo antigo pelo novo: `cp dist/todolist-gtk ~/.local/bin/`.
-
-## 📦 Como Publicar em uma Loja (Flatpak)
-
-Para transformar este projeto em um aplicativo oficial distribuível (com ícone no menu automático):
-
-1.  **Instale as ferramentas:**
-    ```bash
-    sudo apt install flatpak-builder
-    ```
-2.  **Gere o binário PyInstaller primeiramente:**
-    ```bash
-    make build
-    ```
-3.  **Compile o Flatpak localmente:**
-    ```bash
-    flatpak-builder --user --install --force-clean build-dir com.vitordevsp.TodoList.yml
-    ```
-Isso instalará o app no seu sistema e ele aparecerá automaticamente no seu menu de aplicativos com o ícone oficial!
+Isso criará o arquivo `todolist.flatpak` na raiz, pronto para ser enviado para outros usuários ou instalado com `flatpak install`.
 
 ---
 
@@ -83,4 +54,5 @@ Isso instalará o app no seu sistema e ele aparecerá automaticamente no seu men
 Este software é uma demonstração de colaboração entre humano e IA. Foi desenvolvido em tempo recorde, passando por fases de planejamento arquitetural, redesign de layout e polimento de UX, tudo mediado pelo assistente Antigravity.
 
 ---
-Desenvolvido por **vitordevsp** com auxílio do **Antigravity (Gemini 3 Flash)**.
+
+Desenvolvido por **[vitordevsp](https://vitordevsp.com.br)** com auxílio do **Antigravity (Gemini 3 Flash)**.
