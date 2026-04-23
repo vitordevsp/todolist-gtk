@@ -31,7 +31,15 @@ venv/
 # PyInstaller
 *.spec
 
+# Flatpak
+.flatpak-builder/
+*.flatpak
+
+# Databases
+databases/*.db
+
 # IDEs
+.codex
 .vscode/
 .idea/
 .project
