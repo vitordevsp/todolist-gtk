@@ -11,12 +11,43 @@ implementacao, empacotamento, validacao e documentacao.
 
 ## [Unreleased]
 
+Nenhuma mudanca registrada ainda.
+
+## [0.1.0] - 2026-04-23
+
+Primeira release curavel do experimento TodoList GTK.
+
+Esta versao marca o fechamento da base funcional/documental inicial e cria a
+infraestrutura minima para transformar a historia real do projeto em artigos
+futuros.
+
 ### Added
 
-- Preparacao para a primeira release versionada `0.1.0`.
-- Espaco reservado para os proximos ajustes antes da tag publica.
 - Instrumentalizacao minima de `docs/` como instancia reduzida do framework `studio-coding`.
 - Criacao da frente editorial para transformar a historia real do projeto em reports, candidatos e futuros artigos.
+- Criacao de `docs/articles/` como destino futuro para artigos finais ou rascunhos aprovados.
+- Criacao de `docs/reports/` como camada intermediaria de investigacao e curadoria.
+- Criacao do plano `docs/plans/editorial_articles_from_project_history/`.
+- Criacao do relatorio final `docs/reports/article-candidates/` com checkboxes, direcionamento, sinais e campo de observacao humana.
+- Criacao de indices minimos para `docs/`, `docs/knowledge/`, `docs/patterns/` e `docs/plans/`.
+
+### Changed
+
+- Atualizado `docs/plans/todolist.md` para funcionar como inbox simples de planos.
+- Atualizado `docs/README.md` para incluir `reports/` e `articles/` como camadas reais do recorte `studio-coding`.
+- Atualizado o metainfo AppStream para declarar `0.1.0` como release atual.
+
+### Documented
+
+- Registrada a diferenca entre reports internos e articles publicaveis.
+- Registrado o pipeline editorial: plano, reports, candidatos, curadoria humana e so depois artigos finais.
+- Registrada a regra de rodape de coautoria entre Vitor Sampaio e Codex para artigos finais.
+- Registrado que conversas de IA sao contexto editorial, mas devem ser cruzadas com commits, docs, memoria e planos.
+
+### Validated
+
+- Validado `appstreamcli validate --no-net` para o metainfo AppStream.
+- Validado `git diff --check` antes da release.
 
 ## [0.0.0] - 2026-04-23
 
@@ -102,5 +133,6 @@ experimento antes da primeira release `0.1.0` e antes da tag publica.
 - A etapa final revelou um limite importante: uma IA anterior tentou corrigir o bundle introduzindo downloads em tempo de empacotamento, o que motivou a consolidacao de um pipeline mais deterministico.
 - A principal decisao arquitetural do fechamento foi tratar Flatpak como formato oficial de distribuicao e PyInstaller apenas como conveniencia local.
 
-[Unreleased]: https://github.com/vitordevsp/todolist-gtk/compare/v0.0.0...HEAD
-[0.0.0]: https://github.com/vitordevsp/todolist-gtk/releases/tag/v0.0.0
+[Unreleased]: https://github.com/vitordevsp/todolist-gtk/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/vitordevsp/todolist-gtk/compare/85f94fb...v0.1.0
+[0.0.0]: https://github.com/vitordevsp/todolist-gtk/commit/85f94fb
