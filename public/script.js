@@ -229,9 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const payload = {
       name,
       email,
-      message,
-      source: "todolist-gtk-landing",
-      createdAt: new Date().toISOString(),
+      description: message,
     };
 
     if (CONFIG.leadFormEndpoint) {
