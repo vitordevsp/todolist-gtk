@@ -26,10 +26,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const imageLightboxContent = document.querySelector("#image-lightbox-content");
   const toast = document.querySelector("#toast");
   const flatpakDownloadLink = document.querySelector("[data-flatpak-download]");
+  const trackableItems = document.querySelectorAll("[data-track-event]");
   let toastTimer;
   let toastExitTimer;
   let lastScrollY = window.scrollY;
   let ticking = false;
+
+  const trackEvent = (name, data = {}) => {
+    try {
+      if (!window.goatcounter || typeof window.goatcounter.count !== "function") {
+        return;
+      }
+
+      window.goatcounter.count({
+        path: name,
+        title: data.title || name,
+        event: true,
+      });
+    } catch {
+      // Analytics must never break the static landing page.
+    }
+  };
+
+  window.trackEvent = trackEvent;
 
   if (currentYear) {
     currentYear.textContent = String(new Date().getFullYear());
@@ -40,6 +59,18 @@ document.addEventListener("DOMContentLoaded", () => {
     flatpakDownloadLink.setAttribute("target", "_blank");
     flatpakDownloadLink.setAttribute("rel", "noreferrer");
   }
+
+  trackableItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const eventName = item.getAttribute("data-track-event");
+
+      if (eventName) {
+        trackEvent(eventName, {
+          title: item.textContent.trim() || item.getAttribute("aria-label") || eventName,
+        });
+      }
+    });
+  });
 
   if (siteHeader) {
     const showHeader = () => {
@@ -246,6 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error(`Lead request failed with status ${response.status}`);
         }
 
+        trackEvent("lead_submit", { title: "Lead form submit" });
         showToast("Contato enviado. Vou te avisar quando houver algo concreto.");
         form.reset();
         return;
@@ -269,6 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Esse e-mail já foi salvo aqui neste navegador."
         : "Contato salvo. Vou te avisar quando houver algo concreto.",
     );
+    trackEvent("lead_submit", { title: "Lead form submit" });
     form.reset();
   });
 });
