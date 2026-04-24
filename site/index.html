@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoList GTK</title>
+  <meta name="description"
+    content="TodoList GTK e um app nativo para Linux e um laboratorio real de desenvolvimento com IA, direcao humana e documentacao viva." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            display: ["Fraunces", "serif"],
+            serif: ["Source Serif 4", "serif"],
+          },
+          colors: {
+            canvas: "#06080d",
+            panel: "#0d1118",
+            panelSoft: "#111722",
+            panelDeep: "#090d14",
+            line: "#1b2533",
+            text: "#f8fafc",
+            muted: "#a8b3c4",
+            accent: "#67e8f9",
+            accentStrong: "#22d3ee",
+            accentSoft: "#103845",
+            glow: "#7c3aed",
+          },
+          boxShadow: {
+            glow: "0 30px 120px rgba(8, 15, 30, 0.55)",
+            card: "0 18px 60px rgba(4, 10, 20, 0.4)",
+            soft: "0 8px 30px rgba(5, 10, 18, 0.25)",
+            inset: "inset 0 1px 0 rgba(255,255,255,0.06)",
+          },
+          maxWidth: {
+            shell: "1280px",
+          },
+          spacing: {
+            22: "5.5rem",
+            26: "6.5rem",
+            30: "7.5rem",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 0%, rgba(103, 232, 249, 0.14), transparent 30rem),
+        radial-gradient(circle at 92% 12%, rgba(124, 58, 237, 0.12), transparent 28rem),
+        #06080d;
+    }
+
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    .soft-divider {
+      background:
+        linear-gradient(90deg, transparent, rgba(103, 232, 249, 0.08), transparent),
+        rgba(255, 255, 255, 0.015);
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      transition: transform 300ms ease;
+      will-change: transform;
+    }
+
+    .site-header.is-hidden {
+      transform: translateY(calc(-100% - 1px));
+    }
+
+    .hero-title {
+      font-family: "Fraunces", serif;
+      font-size: clamp(2.9rem, 4vw, 6rem);
+      line-height: 1;
+      font-weight: 680;
+      letter-spacing: 0;
+    }
+
+    .section-title {
+      font-family: "Fraunces", serif;
+      font-size: clamp(2rem, 3.3vw, 4.15rem);
+      line-height: 1.08;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .editorial-text {
+      font-family: "Source Serif 4", serif;
+      font-size: clamp(1.08rem, 1.35vw, 1.32rem);
+      line-height: 1.68;
+    }
+
+    .lead-text {
+      font-family: "Source Serif 4", serif;
+      font-size: clamp(1.05rem, 1.2vw, 1.22rem);
+      line-height: 1.68;
+    }
+
+    .card-title {
+      font-size: clamp(1rem, 1.2vw, 1.18rem);
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card-primary {
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+      box-shadow: 0 18px 60px rgba(4, 10, 20, 0.34);
+      border-radius: 1.25rem;
+    }
+
+    .card-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 1rem;
+    }
+
+    .card-ghost {
+      background: rgba(255, 255, 255, 0.018);
+      border-radius: 1rem;
+    }
+
+    .card-technical {
+      border: 1px solid rgba(103, 232, 249, 0.16);
+      background: linear-gradient(180deg, rgba(8, 13, 20, 0.96), rgba(5, 8, 13, 0.98));
+      box-shadow: 0 20px 80px rgba(2, 8, 16, 0.5);
+      border-radius: 1.25rem;
+    }
+
+    .terminal-line {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 700ms ease,
+        transform 700ms ease;
+    }
+
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="font-sans text-text antialiased selection:bg-accent/30">
+  <div class="relative min-h-screen overflow-x-hidden">
+    <a
+      id="github-corner"
+      class="group pointer-events-none fixed right-0 top-0 z-50 hidden h-20 w-20 overflow-hidden text-white opacity-0 transition duration-200 md:block"
+      href="https://github.com/vitordevsp/todolist-gtk"
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Ver projeto no GitHub"
+    >
+      <span class="absolute right-0 top-0 h-0 w-0 border-l-[80px] border-l-transparent border-t-[80px] border-t-white/10 transition group-hover:border-t-accent/25"></span>
+      <svg
+        class="absolute right-3 top-3 h-6 w-6 transition group-hover:text-accent"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.16c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18A11.02 11.02 0 0 1 12 6.04c.98 0 1.96.13 2.88.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.79.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"
+        />
+      </svg>
+    </a>
+
+    <header id="site-header" class="site-header z-40 bg-canvas/75 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-shell items-center justify-between px-6 py-4 lg:px-10">
+        <a class="flex items-center gap-3 text-sm font-semibold text-white" href="#hero">
+          <span
+            class="inline-flex h-9 w-9 items-center justify-center rounded-2xl border border-white/20 bg-white/5 shadow-inset">
+            <i data-lucide="check-square-2" class="h-4 w-4 text-accent"></i>
+          </span>
+          TODOLIST GTK
+        </a>
+
+        <nav class="hidden items-center gap-6 text-sm text-muted lg:flex">
+          <a class="transition hover:text-white" href="#about">Projeto</a>
+          <a class="transition hover:text-white" href="#why">Por que existe</a>
+          <a class="transition hover:text-white" href="#features">Features</a>
+          <a class="transition hover:text-white" href="#process">Processo</a>
+          <a class="transition hover:text-white" href="#lab">Laboratorio</a>
+          <a class="transition hover:text-white" href="#author">Autor</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a class="hidden rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/10 lg:inline-flex"
+            href="#lead">
+            Quero aprender isso
+          </a>
+          <button id="mobile-menu-button" type="button" aria-label="Abrir menu" aria-expanded="false"
+            aria-controls="mobile-menu"
+            class="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/20 bg-white/5 text-white transition hover:border-white/30 hover:bg-white/10 lg:hidden">
+            <i data-lucide="menu" class="h-5 w-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden bg-panel/95 lg:hidden">
+        <nav class="mx-auto flex max-w-shell flex-col px-6 py-4 text-sm text-slate-200">
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#about">Projeto</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#why">Por que existe</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#features">Features</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#process">Processo</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#lab">Laboratorio</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#author">Autor</a>
+          <a class="rounded-2xl px-4 py-3 transition hover:bg-white/5" href="#lead">Quero aprender isso</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="pt-[76px]">
+      <section id="hero"
+        class="hero-grid relative scroll-mt-24 overflow-hidden px-6 pb-24 pt-16 lg:px-10 lg:pb-30 lg:pt-22">
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas">
+        </div>
+        <div class="mx-auto grid max-w-shell items-center gap-14 xl:grid-cols-[1.02fr_0.98fr]">
+          <div data-reveal class="relative z-10 max-w-4xl">
+            <div
+              class="eyebrow inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-slate-300 shadow-inset">
+              <span class="h-2 w-2 rounded-full bg-accent"></span>
+              Pequeno no escopo, real no ciclo
+            </div>
+            <h1 class="hero-title mt-8 text-white">
+              Um app nativo para Linux.<br />
+              <span class="bg-gradient-to-r from-accent via-cyan-200 to-white bg-clip-text text-transparent">
+                Um laboratório real
+              </span><br />
+              de desenvolvimento com IA.
+            </h1>
+            <p class="lead-text mt-8 max-w-2xl text-slate-300">
+              TodoList GTK é um app nativo para Linux criado para organizar listas e tarefas em uma interface simples,
+              persistente e instalável. O projeto fecha o ciclo completo: produto desktop, SQLite, build, Flatpak,
+              documentação viva e aprendizado guiado por IA.
+            </p>
+            <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+              <a class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-soft transition duration-200 hover:bg-slate-200 hover:shadow-card"
+                href="#lead">
+                Quero aprender isso
+              </a>
+              <a class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition duration-200 hover:border-white/35 hover:bg-white/10"
+                href="#process">
+                Ver como foi construído
+              </a>
+            </div>
+            <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a class="group inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition duration-200 hover:border-white/35 hover:bg-white/[0.08]"
+                href="https://github.com/vitordevsp/todolist-gtk" target="_blank" rel="noreferrer">
+                <i data-lucide="code-2" class="h-4 w-4 text-accent transition group-hover:text-white"></i>
+                Ver código no GitHub
+              </a>
+              <a class="group inline-flex items-center justify-center gap-2 rounded-full border border-accent/30 bg-gradient-to-r from-accent/15 to-glow/20 px-5 py-3 text-sm font-semibold text-white transition duration-200 hover:border-accent/50 hover:from-accent/20 hover:to-glow/30"
+                href="#build"
+                data-flatpak-download>
+                <i data-lucide="download" class="h-4 w-4 text-accent transition group-hover:text-white"></i>
+                Baixar Flatpak
+              </a>
+            </div>
+          </div>
+
+          <div data-reveal class="relative z-10">
+            <div class="absolute -right-8 top-8 h-52 w-52 rounded-full bg-accent/14 blur-3xl"></div>
+            <button id="hero-image-trigger" type="button"
+              data-lightbox-trigger
+              data-lightbox-src="../public/image.png"
+              data-lightbox-alt="Captura ampliada do aplicativo TodoList GTK em execução no Linux"
+              class="group relative block w-full overflow-hidden rounded-xl bg-white/[0.03] p-2 text-left shadow-card transition duration-200 hover:bg-white/[0.05]"
+              aria-label="Ampliar imagem do TodoList GTK">
+              <img src="../public/image.png" alt="Captura de tela do aplicativo TodoList GTK em execução no Linux"
+                class="h-auto w-full rounded-lg object-contain" loading="eager" />
+              <span
+                class="pointer-events-none absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/55 px-3 py-2 text-xs font-semibold text-white opacity-0 backdrop-blur transition group-hover:opacity-100">
+                <i data-lucide="zoom-in" class="h-4 w-4 text-accent"></i>
+                Ver maior
+              </span>
+            </button>
+
+            <div class="mt-5 grid gap-4 sm:grid-cols-3">
+              <div class="card-secondary p-4 text-sm leading-6 text-muted">15 a 20 horas distribuídas ao longo de alguns
+                dias</div>
+              <div class="card-secondary p-4 text-sm leading-6 text-muted">Python, GTK4, Libadwaita, SQLite e Flatpak
+              </div>
+              <div class="card-secondary p-4 text-sm leading-6 text-muted">Direção humana, IA como parceria e
+                documentação viva</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="highlights" class="soft-divider px-6 py-8 lg:px-10">
+        <div class="mx-auto grid max-w-shell gap-3 md:grid-cols-3">
+          <article data-reveal class="card-ghost p-5">
+            <div class="text-sm font-semibold text-white">IA não fez o app sozinha, mas mudou tudo</div>
+            <p class="mt-2 text-sm leading-6 text-muted">O ganho foi encurtar o caminho entre ideia, tentativa e
+              iteração.</p>
+          </article>
+          <article data-reveal class="card-ghost p-5">
+            <div class="text-sm font-semibold text-white">Pequeno no escopo, real no ciclo</div>
+            <p class="mt-2 text-sm leading-6 text-muted">Um TodoList parece modesto. Fechar UI, persistência, build e
+              distribuição já é software real.</p>
+          </article>
+          <article data-reveal class="card-ghost p-5">
+            <div class="text-sm font-semibold text-white">Antes o gargalo era tempo, agora é direção</div>
+            <p class="mt-2 text-sm leading-6 text-muted">Quando a stack nova deixa de ser parede, orientar bem o
+              processo passa a pesar mais.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="manifesto" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div data-reveal class="mx-auto max-w-[880px] text-center">
+          <h2 class="section-title text-white">
+            O valor não está só no app.<br />
+            Está no jeito de construir.
+          </h2>
+          <p class="editorial-text mx-auto mt-8 max-w-[740px] text-slate-300">
+            TodoList GTK é pequeno por escolha. O que importa aqui é o ciclo: sair de uma ideia antiga, entrar numa
+            stack desconhecida, usar IA como parceira e transformar isso em um app real, instalável e documentado.
+          </p>
+        </div>
+      </section>
+
+      <section id="about" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div class="mx-auto grid max-w-shell gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <div data-reveal class="max-w-[860px]">
+            <div class="eyebrow text-muted">Sobre o projeto</div>
+            <h2 class="section-title mt-5 text-white">Isso começou como um teste pessoal para entrar numa stack nova sem
+              parar a vida.</h2>
+          </div>
+          <div data-reveal class="editorial-text max-w-[760px] space-y-6 text-slate-300">
+            <p>
+              Eu queria construir um app nativo para Linux fazia tempo, mas sempre esbarrava no mesmo custo: aprender
+              GTK, Python e o ecossistema desktop com a profundidade que isso pede.
+            </p>
+            <p>
+              Esse projeto nasceu no meio do caminho, não em condições perfeitas. Algumas horas aqui, outras ali.
+              Direção, iteração, revisão. Foi mais parecido com pair programming real do que com delegação cega.
+            </p>
+            <p>
+              O resultado foi um app funcional e, junto dele, uma forma mais honesta de pensar construção com IA.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="why" class="scroll-mt-24 px-6 py-24 lg:px-10">
+        <div class="mx-auto max-w-shell">
+          <div data-reveal class="max-w-[860px]">
+            <div class="eyebrow text-muted">Por que isso existe</div>
+            <h2 class="section-title mt-5 text-white">Um laboratório para aprender Linux de verdade, com software de
+              verdade.</h2>
+          </div>
+          <div class="mt-12 grid gap-5 lg:grid-cols-3">
+            <article data-reveal class="card-secondary p-6">
+              <div class="card-title text-white">Aprender fazendo</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Em vez de consumir semanas estudando abstratamente a stack, o
+                projeto usou um app real como trilha de entrada.</p>
+            </article>
+            <article data-reveal class="card-secondary p-6">
+              <div class="card-title text-white">Testar processo</div>
+              <p class="mt-3 text-sm leading-7 text-muted">O experimento não era só técnico. Era entender como IA, docs
+                e especificação mudam o fluxo de desenvolvimento.</p>
+            </article>
+            <article data-reveal class="card-secondary p-6">
+              <div class="card-title text-white">Ganhar repertório</div>
+              <p class="mt-3 text-sm leading-7 text-muted">O app entrega valor, mas também deixa um rastro de decisões,
+                conhecimento técnico e aprendizado reaproveitável.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="hero-grid scroll-mt-24 px-6 py-26 lg:px-10">
+        <div class="mx-auto max-w-shell">
+          <div data-reveal class="max-w-[860px]">
+            <div class="eyebrow text-muted">O produto</div>
+            <h2 class="section-title mt-5 text-white">Simples por escolha. Completo o bastante para fechar um ciclo
+              real.</h2>
+          </div>
+          <div class="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <article data-reveal class="card-primary p-7">
+              <i data-lucide="layout-panel-left" class="h-6 w-6 text-accent"></i>
+              <div class="card-title mt-5 text-white">Múltiplas listas</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Estrutura de barra lateral com sessões para separar trabalho,
+                estudos, ideias e qualquer outro contexto.</p>
+            </article>
+            <article data-reveal class="card-secondary p-7">
+              <i data-lucide="badge-check" class="h-6 w-6 text-accent"></i>
+              <div class="card-title mt-5 text-white">CRUD de tarefas</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Criação, edição, renomeação e exclusão dentro de um fluxo
+                direto, sem ruído de produto inflado.</p>
+            </article>
+            <article data-reveal class="card-secondary p-7">
+              <i data-lucide="database" class="h-6 w-6 text-accent"></i>
+              <div class="card-title mt-5 text-white">Persistência local</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Dados guardados em SQLite local, respeitando o ambiente Linux
+                e sem dependências de conta ou nuvem.</p>
+            </article>
+            <article data-reveal class="card-secondary p-7">
+              <i data-lucide="monitor-up" class="h-6 w-6 text-accent"></i>
+              <div class="card-title mt-5 text-white">Live reload</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Workflow rápido para iterar interface sem transformar cada
+                ajuste em custo desnecessário.</p>
+            </article>
+            <article data-reveal class="card-primary p-7 xl:col-span-2">
+              <i data-lucide="package" class="h-6 w-6 text-accent"></i>
+              <div class="card-title mt-5 text-white">Build, bundle e cara de app nativo</div>
+              <p class="mt-3 max-w-2xl text-sm leading-7 text-muted">O projeto não parou na UI. Passou por build local,
+                Flatpak e distribuição como app Linux de verdade, com a intenção de parecer pertencer ao desktop.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="stack" class="hero-grid scroll-mt-24 px-6 py-26 lg:px-10">
+        <div class="mx-auto grid max-w-shell gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div data-reveal class="max-w-[860px]">
+            <div class="eyebrow text-muted">Stack real</div>
+            <h2 class="section-title mt-5 text-white">Entrar numa stack nova deixou de ser bloqueio absoluto.</h2>
+            <p class="editorial-text mt-8 max-w-[740px] text-slate-300">
+              O app foi construído com Python, GTK4, Libadwaita, SQLite e Flatpak. Nada disso era minha stack principal.
+              Justamente por isso o experimento importa.
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div data-reveal class="card-technical p-6">
+              <div class="card-title text-white">Python + PyGObject</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Base da aplicação desktop e ponte com GTK/Libadwaita.</p>
+            </div>
+            <div data-reveal class="card-technical p-6">
+              <div class="card-title text-white">GTK4 + Libadwaita</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Interface nativa, componentes modernos e integração melhor
+                com Linux.</p>
+            </div>
+            <div data-reveal class="card-technical p-6">
+              <div class="card-title text-white">SQLite</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Persistência local simples, direta e suficiente para o
+                escopo.</p>
+            </div>
+            <div data-reveal class="card-technical p-6">
+              <div class="card-title text-white">Flatpak</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Empacotamento e distribuição coerentes com a proposta de app
+                Linux.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div class="mx-auto max-w-shell">
+          <div data-reveal class="max-w-[900px]">
+            <div class="eyebrow text-muted">Processo</div>
+            <h2 class="section-title mt-5 text-white">Não foi sentar e codar por horas. Foi orientar, deixar evoluir,
+              voltar e apertar o ciclo.</h2>
+          </div>
+          <div class="relative mt-16 grid gap-6 lg:grid-cols-4">
+            <article data-reveal class="relative card-ghost p-6">
+              <div class="font-display text-4xl leading-none text-accent">01</div>
+              <div class="card-title mt-5 text-white">Direção</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Definir o que precisava existir, o que importava e o que era
+                escopo demais.</p>
+            </article>
+            <article data-reveal class="relative card-ghost p-6">
+              <div class="font-display text-4xl leading-none text-accent">02</div>
+              <div class="card-title mt-5 text-white">Iteração com IA</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Deixar a IA andar um trecho, produzir base e destravar
+                entrada na stack.</p>
+            </article>
+            <article data-reveal class="relative card-ghost p-6">
+              <div class="font-display text-4xl leading-none text-accent">03</div>
+              <div class="card-title mt-5 text-white">Revisão real</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Voltar para testar, validar, corrigir, cortar exagero e
+                manter o projeto honesto.</p>
+            </article>
+            <article data-reveal class="relative card-ghost p-6">
+              <div class="font-display text-4xl leading-none text-accent">04</div>
+              <div class="card-title mt-5 text-white">Consolidação</div>
+              <p class="mt-3 text-sm leading-7 text-muted">Registrar decisões, documentar aprendizado e transformar o
+                projeto em algo reaproveitável.</p>
+            </article>
+          </div>
+          <p data-reveal class="mt-16 max-w-[860px] font-display text-3xl leading-tight text-white md:text-5xl">
+            Prompt virou interface de desenvolvimento.
+          </p>
+        </div>
+      </section>
+
+      <section id="build" class="hero-grid scroll-mt-24 px-6 py-26 lg:px-10">
+        <div class="mx-auto grid max-w-shell gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div data-reveal class="max-w-[900px]">
+            <div class="eyebrow text-muted">Build real</div>
+            <h2 class="section-title mt-5 text-white">Do script ao Flatpak, o projeto atravessou o ciclo real de um app
+              Linux.</h2>
+            <p class="editorial-text mt-8 max-w-[740px] text-slate-300">
+              Rodar localmente, iterar, buildar, empacotar e testar instalação. Fazer uma interface é uma coisa. Fechar
+              esse ciclo é outra.
+            </p>
+          </div>
+          <div data-reveal class="card-technical overflow-hidden">
+            <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <div class="flex gap-2">
+                <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-yellow-300/80"></span>
+                <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
+              </div>
+              <span
+                class="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs text-accent">br.com.vitordevsp.TodoList</span>
+            </div>
+            <div class="space-y-4 p-6 text-sm">
+              <div class="terminal-line text-slate-300"><span class="text-accent">$</span> make run</div>
+              <div class="terminal-line text-slate-300"><span class="text-accent">$</span> make dev</div>
+              <div class="terminal-line text-slate-300"><span class="text-accent">$</span> make build</div>
+              <div class="terminal-line text-slate-300"><span class="text-accent">$</span> make flatpak</div>
+              <div class="terminal-line text-white"><span class="text-accent">$</span> make bundle</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="content" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div class="mx-auto grid max-w-shell gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <div data-reveal class="max-w-[860px]">
+            <div class="eyebrow text-muted">Documentação viva</div>
+            <h2 class="section-title mt-5 text-white">O repositório não guarda só código. Guarda raciocínio.</h2>
+          </div>
+          <div data-reveal class="editorial-text max-w-[760px] text-slate-300">
+            <p>
+              Planos, logs, knowledge, reports e artigos viraram parte do produto. Aqui, documentação não entra no final
+              como burocracia. Ela guia desenvolvimento.
+            </p>
+            <div class="mt-10 grid gap-4 sm:grid-cols-3">
+              <div class="card-ghost p-5 text-sm leading-7 text-muted">Specs e planos para atravessar sessões longas.
+              </div>
+              <div class="card-ghost p-5 text-sm leading-7 text-muted">Knowledge e reports para decisões reutilizáveis.
+              </div>
+              <div class="card-ghost p-5 text-sm leading-7 text-muted">Artigos finais para contar a história do projeto.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lab" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div data-reveal class="mx-auto max-w-[900px]">
+          <div class="eyebrow text-muted">Laboratório</div>
+          <h2 class="section-title mt-5 text-white">
+            O valor desse projeto não está só no app. Está no jeito de construir.
+          </h2>
+          <div class="editorial-text mt-8 max-w-[740px] space-y-6 text-slate-300">
+            <p>
+              Esse projeto começou como um teste. Eu queria entender até onde dava pra ir usando IA como parceira. No
+              meio do caminho ficou claro: isso não era só sobre um app. Era sobre aprender a construir de um jeito
+              diferente.
+            </p>
+            <p>
+              O Studio Coding entrou como framework de trabalho: plano para dar direção, specs para transformar intenção
+              em contrato, logs para não perder contexto, padrões para repetir o que funcionou e memória para atravessar
+              sessões longas sem recomeçar do zero.
+            </p>
+            <p>
+              A taxonomia importa porque tira a IA do improviso. Projeto, plano, tarefa, decisão, rotina, skill e
+              documentação deixam de ser arquivos soltos e viram um mapa de desenvolvimento. O ganho não é automação
+              mágica. É direção humana com um sistema que ajuda a IA a trabalhar melhor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="author" class="scroll-mt-24 px-6 py-30 lg:px-10">
+        <div class="mx-auto grid max-w-shell items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div data-reveal class="max-w-[820px]">
+            <div class="eyebrow text-muted">Quem construiu</div>
+            <h2 class="section-title mt-5 text-white">Vitor Sampaio</h2>
+            <div class="mt-8 max-w-[760px] space-y-5 text-slate-300">
+              <p class="lead-text">
+                Desenvolvedor web fullstack, curioso por produto e cada vez mais interessado em construir software
+                usando IA como parceira.
+              </p>
+              <p class="lead-text">
+                Eu trabalho principalmente com JavaScript e TypeScript, criando interfaces, produtos digitais e soluções
+                com IA para educação. No dia a dia, atuo no time de Inovação Tecnológica do Ensino Digital do Hospital
+                Israelita Albert Einstein.
+              </p>
+              <p class="lead-text">
+                O TodoList GTK nasceu justamente fora da minha zona de conforto: um app Linux com Python, GTK e Flatpak.
+                Mais do que aprender uma stack nova, esse projeto virou um laboratório para testar um jeito diferente de
+                construir — usando documentação, direção e IA para transformar uma ideia antiga em software real.
+              </p>
+            </div>
+            <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                href="https://www.vitorsampaio.com.br/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i data-lucide="globe" class="h-4 w-4 text-accent"></i>
+                Meu site
+              </a>
+              <a
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                href="https://github.com/vitordevsp"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i data-lucide="code-2" class="h-4 w-4 text-accent"></i>
+                GitHub
+              </a>
+              <a
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+                href="https://www.linkedin.com/in/vitordevsp"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i data-lucide="user-round" class="h-4 w-4 text-accent"></i>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div data-reveal class="relative mx-auto w-full max-w-[440px] lg:mr-0">
+            <div class="absolute -inset-6 rounded-[2.5rem] bg-accent/10 blur-3xl"></div>
+            <div class="relative overflow-hidden rounded-[2.25rem] bg-panelDeep p-3 shadow-card">
+              <div class="relative aspect-[9/16] overflow-hidden rounded-[1.75rem] bg-black">
+                <button
+                  type="button"
+                  data-lightbox-trigger
+                  data-lightbox-src="./public/vitor-sampaio.jpg"
+                  data-lightbox-alt="Foto ampliada de Vitor Sampaio"
+                  class="group block h-full w-full"
+                  aria-label="Ampliar foto de Vitor Sampaio"
+                >
+                  <img
+                    src="./public/vitor-sampaio.jpg"
+                    alt="Foto de Vitor Sampaio"
+                    class="h-full w-full object-cover transition duration-200 group-hover:scale-[1.015]"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-x-4 bottom-4 flex justify-center">
+                    <span class="rounded-full bg-black/60 px-4 py-2 text-center text-xs font-semibold text-slate-100 backdrop-blur-md">
+                      BH, Chapada Diamantina - Vale do Pati
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="lead" class="scroll-mt-24 px-6 py-26 lg:px-10">
+        <div
+          class="mx-auto grid max-w-shell gap-10 rounded-[2rem] bg-gradient-to-br from-panel to-panelSoft p-[30px] shadow-card md:p-[38px] lg:grid-cols-[1.05fr_0.95fr]">
+          <div data-reveal>
+            <div class="eyebrow text-muted">Captura de interesse</div>
+            <h2 class="section-title mt-5 text-white">
+              Quer ser avisado quando eu transformar esse processo em curso?
+            </h2>
+            <div class="mt-10 max-w-[760px] space-y-4 text-slate-300">
+              <p class="editorial-text">
+                Estou organizando um conteúdo para ensinar o caminho por trás desse projeto: sair de uma ideia, criar
+                specs melhores, usar IA com direção e construir algo real mesmo entrando em uma stack nova.
+              </p>
+              <p class="editorial-text">
+                A proposta não é vender promessa mágica. É mostrar o processo prático: como pensar, escrever contexto,
+                revisar código, iterar com critério e transformar IA em parceira de desenvolvimento.
+              </p>
+              <p class="editorial-text">
+                Se isso fizer sentido pra você, deixa seu contato. Quando a ideia virar algo estruturado, você recebe
+                primeiro.
+              </p>
+            </div>
+          </div>
+
+          <div data-reveal class="card-technical p-6">
+            <form id="lead-form" class="space-y-4" data-lead-form>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <label class="block">
+                  <span class="mb-2 block text-sm font-medium text-white">Nome</span>
+                  <input id="lead-name" name="name" type="text" placeholder="Seu nome" required
+                    class="h-12 w-full rounded-2xl border border-white/20 bg-white/[0.04] px-4 text-base text-white outline-none transition placeholder:text-slate-500 focus:border-white/30 focus:bg-white/[0.06]" />
+                </label>
+                <label class="block">
+                  <span class="mb-2 block text-sm font-medium text-white">E-mail</span>
+                  <input id="lead-email" name="email" type="email" placeholder="voce@exemplo.com" required
+                    class="h-12 w-full rounded-2xl border border-white/20 bg-white/[0.04] px-4 text-base text-white outline-none transition placeholder:text-slate-500 focus:border-white/30 focus:bg-white/[0.06]" />
+                </label>
+              </div>
+              <label class="block">
+                <span class="mb-2 block text-sm font-medium text-white">O que você quer aprender ou construir com
+                  IA?</span>
+                <textarea id="lead-message" name="message" rows="5"
+                  placeholder="Ex: Quero aprender a criar um app desktop, organizar specs melhores, usar IA para sair de uma stack nova..."
+                  class="w-full resize-none rounded-2xl border border-white/20 bg-white/[0.04] px-4 py-3 text-base leading-7 text-white outline-none transition placeholder:text-slate-500 focus:border-white/30 focus:bg-white/[0.06]"></textarea>
+              </label>
+              <button type="submit"
+                class="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-accent to-glow px-6 py-3.5 text-sm font-semibold text-slate-950 transition hover:brightness-110">
+                Quero aprender esse processo
+              </button>
+              <p class="text-xs leading-6 text-muted">Vou te avisar apenas quando houver algo concreto para mostrar.</p>
+              <p id="lead-feedback" class="sr-only" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="px-6 pb-10 pt-10 lg:px-10">
+      <div class="mx-auto max-w-shell pt-8">
+        <div class="grid gap-10 md:grid-cols-3">
+          <div data-reveal>
+            <div class="flex items-center gap-3 text-sm font-semibold text-white">
+              <span
+                class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/20 bg-white/5 shadow-inset">
+                <i data-lucide="check-square-2" class="h-4 w-4 text-accent"></i>
+              </span>
+              TODOLIST GTK
+            </div>
+            <p class="mt-4 max-w-sm text-sm leading-7 text-muted">
+              App nativo Linux, documentação viva e um laboratório real para explorar desenvolvimento guiado por IA com
+              critério.
+            </p>
+          </div>
+          <div data-reveal>
+            <div class="eyebrow text-muted">Links rápidos</div>
+            <nav class="mt-4 flex flex-col gap-3 text-sm text-slate-300">
+              <a class="transition hover:text-white" href="#about">Projeto</a>
+              <a class="transition hover:text-white" href="#features">Features</a>
+              <a class="transition hover:text-white" href="#lab">Lab</a>
+            </nav>
+          </div>
+          <div data-reveal>
+            <div class="eyebrow text-muted">Redes</div>
+            <div class="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-300">
+              <a class="group inline-flex items-center gap-2 transition hover:text-white"
+                href="https://www.vitorsampaio.com.br/" target="_blank" rel="noreferrer"><i data-lucide="globe"
+                  class="h-4 w-4 shrink-0 text-accent"></i>Website</a>
+              <a class="group inline-flex items-center gap-2 transition hover:text-white"
+                href="https://www.linkedin.com/in/vitordevsp" target="_blank" rel="noreferrer"><i
+                  data-lucide="user-round" class="h-4 w-4 shrink-0 text-accent"></i>LinkedIn</a>
+              <a class="group inline-flex items-center gap-2 transition hover:text-white"
+                href="https://github.com/vitordevsp" target="_blank" rel="noreferrer"><i data-lucide="code-2"
+                  class="h-4 w-4 shrink-0 text-accent"></i>GitHub</a>
+              <a class="group inline-flex items-center gap-2 transition hover:text-white"
+                href="https://www.youtube.com/@vitordevsp" target="_blank" rel="noreferrer"><i data-lucide="play"
+                  class="h-4 w-4 shrink-0 text-accent"></i>YouTube</a>
+              <a class="group inline-flex items-center gap-2 transition hover:text-white"
+                href="https://www.instagram.com/vitordevsp" target="_blank" rel="noreferrer"><i data-lucide="camera"
+                  class="h-4 w-4 shrink-0 text-accent"></i>Instagram</a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 flex flex-col gap-3 pt-5 text-sm text-muted md:flex-row md:items-center md:justify-between">
+          <div>© <span id="current-year"></span> TodoList GTK. Todos os direitos reservados.</div>
+          <div class="flex items-center gap-4">
+            <a class="transition hover:text-white" href="#lead">Quero aprender isso</a>
+            <a class="transition hover:text-white" href="#hero">Topo</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="image-lightbox"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 backdrop-blur-md" aria-hidden="true">
+      <button id="image-lightbox-close" type="button"
+        class="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:bg-white/20"
+        aria-label="Fechar imagem ampliada">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+      <img id="image-lightbox-content" src="../public/image.png" alt="Captura ampliada do aplicativo TodoList GTK em execução no Linux"
+        class="max-h-[88vh] w-full max-w-6xl rounded-xl object-contain shadow-card" />
+    </div>
+
+    <div
+      id="toast"
+      class="pointer-events-none fixed right-5 top-5 z-50 hidden max-w-sm rounded-2xl bg-panelDeep px-5 py-4 text-sm font-medium text-white opacity-0 shadow-card transition duration-300 ease-out -translate-y-3"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
