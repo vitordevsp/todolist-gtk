@@ -3,7 +3,7 @@ title: Plano 004: Landing Page do Projeto
 description: Frente de descoberta, narrativa e implementacao de uma landing page para apresentar o app e o contexto do projeto.
 status: in_progress
 source_path: docs/plans/004-landing-page-do-projeto/plan.md
-last_updated: 2026-04-23 00:00
+last_updated: 2026-04-24 00:00
 ---
 
 # Plano 004: Landing Page do Projeto

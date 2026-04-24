@@ -77,3 +77,9 @@
 - `site/script.js` preparado com `CONFIG.flatpakDownloadUrl` e
   `CONFIG.leadFormEndpoint`; botao Flatpak e formulario passam a usar esses
   valores quando forem preenchidos, mantendo fallback local enquanto vazios.
+- GitHub Pages configurado via Actions para publicar a pasta `site/`, ja que a
+  UI de deploy por branch nao permite selecionar `/site`; assets da landing
+  foram mantidos autocontidos em `site/public/`.
+- Abordagem simplificada apos revisao: workflow de GitHub Actions removido,
+  landing movida para `index.html` na raiz e assets/JS/documentos auxiliares
+  concentrados em `public/` para deploy por branch usando `/`.

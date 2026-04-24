@@ -13,7 +13,7 @@ Estado atual: **aberto**
 - [x] Implementar a base estatica inicial da landing page no stack exigido.
 - [x] Criar o conteudo completo inicial da landing com narrativa e posicionamento.
 - [x] Refinar a estrutura HTML com semantica e secoes preenchidas.
-- [x] Consolidar `site/product/` com produto, UX e narrativa.
+- [x] Consolidar `public/product/` com produto, UX e narrativa.
 - [x] Revisar responsividade, clareza de copy e consistencia com o produto real.
 - [x] Rodar validacoes tecnicas cabiveis.
 - [ ] Atualizar README e/ou docs impactados pela nova apresentacao.
