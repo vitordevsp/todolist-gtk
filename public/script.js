@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const CONFIG = {
-    flatpakDownloadUrl: "",
-    leadFormEndpoint: "",
+    flatpakDownloadUrl: "https://github.com/vitordevsp/todolist-gtk/releases/download/v0.1.1/todolist.flatpak",
+    leadFormEndpoint: "https://studio-functions.vercel.app/api/leads",
   };
 
   if (window.lucide) {
