@@ -13,12 +13,13 @@ retomar a frente sem depender apenas do chat anterior.
 - [`001-v1-todolist/`](./001-v1-todolist/): plano principal da consolidacao da v1.
 - [`002-editorial-articles-from-project-history/`](./002-editorial-articles-from-project-history/plan.md): frente editorial para transformar a historia real do projeto em reports, candidatos e artigos futuros.
 - [`003-articles-from-drafts/`](./003-articles-from-drafts/plan.md): execucao focada na reescrita dos dois rascunhos iniciais de artigos.
+- [`004-landing-page-do-projeto/`](./004-landing-page-do-projeto/plan.md): frente de descoberta, narrativa e implementacao de uma landing page para apresentar o app e o contexto do projeto.
 
 ## Plano Como Pasta
 
 Quando uma frente crescer, prefira uma pasta propria com:
 
-- `plan.md`: objetivo, contexto e criterio de aceite.
+- `plan.md`: objetivo, contexto e criterio de aceite, com frontmatter e `status`.
 - `tasks.md`: lista de tarefas e status.
 - `logs.md`: historico cronologico de decisoes e validacoes.
 - `questions.md`: perguntas em aberto para decisao humana, quando necessario.

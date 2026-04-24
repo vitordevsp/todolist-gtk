@@ -1,3 +1,11 @@
+---
+title: Plano de Desenvolvimento: TodoList GTK (v1)
+description: Consolidacao da v1 do app desktop nativo, cobrindo identidade, UX, persistencia, build e distribuicao.
+status: in_progress
+source_path: docs/plans/001-v1-todolist/plan.md
+last_updated: 2026-04-23 00:00
+---
+
 # Plano de Desenvolvimento: TodoList GTK (v1)
 
 Este documento registra o estado atual da v1 do **TodoList GTK** e orienta as proximas manutencoes. A aplicacao ja possui uma primeira versao funcional; o foco atual e alinhar identidade, documentacao, persistencia e empacotamento para deixar o projeto coerente como app desktop nativo Linux.

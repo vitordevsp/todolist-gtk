@@ -40,3 +40,15 @@ no `logs.md` do plano correspondente.
 - Movidos `artigo_experiencia_ai.md` e `artigo_tecnico_linux_gtk.md` da raiz para `docs/reports/article-candidates/`.
 - Atualizado `docs/articles/README.md` para tratar `articles/` como camada de artigos finalizados e apontar rascunhos para `reports/article-candidates/`.
 - Adicionado frontmatter editorial aos dois artigos finais com status, versao, autores, serie e metadados de manutencao.
+
+## 2026-04-23 - Plano da landing page institucional
+
+- Criado `docs/plans/004-landing-page-do-projeto/` como nova frente para descoberta, narrativa e implementacao de uma landing page.
+- Registrada a necessidade de absorver um prompt-base detalhado antes de fechar copy, hierarquia visual e escopo tecnico da pagina.
+- Atualizado o indice `docs/plans/README.md` para incluir a nova frente.
+
+## 2026-04-23 - Frontmatter nos planos
+
+- Adicionado frontmatter aos `plan.md` em `docs/plans/`.
+- Registrado `status` diretamente nos planos com taxonomia curta: `active`, `in_progress` e `completed`.
+- Atualizados `docs/patterns/plan-patterns.md` e `docs/plans/README.md` para explicitar o novo cabecalho minimo.

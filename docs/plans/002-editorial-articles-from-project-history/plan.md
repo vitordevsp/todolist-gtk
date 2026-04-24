@@ -1,3 +1,11 @@
+---
+title: Plano: Artigos a Partir da Historia Real do Projeto
+description: Frente editorial para transformar a historia real do TodoList GTK em reports, candidatos e artigos futuros.
+status: completed
+source_path: docs/plans/002-editorial-articles-from-project-history/plan.md
+last_updated: 2026-04-23 00:00
+---
+
 # Plano: Artigos a Partir da Historia Real do Projeto
 
 ## 1. Decisao de Frente

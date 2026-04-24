@@ -1,3 +1,11 @@
+---
+title: Plano 000: Desktop de Planos
+description: Entrada operacional para notas soltas, triagem inicial e backlog geral antes de uma frente ganhar plano proprio.
+status: active
+source_path: docs/plans/000-desktop/plan.md
+last_updated: 2026-04-23 00:00
+---
+
 # Plano 000: Desktop de Planos
 
 ## Objetivo

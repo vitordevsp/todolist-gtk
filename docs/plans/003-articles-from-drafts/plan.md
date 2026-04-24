@@ -1,3 +1,11 @@
+---
+title: Plano 003: Reescrita dos Dois Artigos Iniciais
+description: Execucao editorial focada em transformar os dois rascunhos iniciais em artigos finais sustentados pelo historico real do projeto.
+status: completed
+source_path: docs/plans/003-articles-from-drafts/plan.md
+last_updated: 2026-04-23 00:00
+---
+
 # Plano 003: Reescrita dos Dois Artigos Iniciais
 
 ## 1. Objetivo
